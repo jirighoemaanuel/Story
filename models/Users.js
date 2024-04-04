@@ -18,7 +18,11 @@ const PostSchema = new mongoose.Schema({
 const UserSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: [true, 'must provide a email'],
+    required: [true, 'must provide an email'],
+    match: [
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      'Please fill a valid email address',
+    ],
   },
   password: {
     type: String,

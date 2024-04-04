@@ -1,11 +1,20 @@
 import User from '../models/Users.js';
 
-
-import User from '../models/Users.js';
-
 // Controller for user registration
 export const register = async (req, res) => {
-  // Implement registration logic here
+  try {
+    const { email, password } = req.body;
+
+    // Create a new user instance
+    const user = new User({ email, password });
+
+    // Save the user to the database
+    await user.save();
+
+    res.status(201).json({ message: 'User registered successfully', user });
+  } catch (error) {
+    res.status(500).json({ message: 'Error registering user', error });
+  }
 };
 
 // Controller for user login
